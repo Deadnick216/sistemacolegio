@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docente Menu</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para secciones */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        /* Lista de asignaturas */
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Enlaces */
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+
+        /* Estilo de botones */
+        .button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Mensaje de bienvenida */
+        .welcome-message {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsividad */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Bienvenido, {{ request.user.nombre }}</h2>
+    </header>
+
+    <div class="container">
+
+        <div class="welcome-message">
+            <p>Seleccione las opciones a continuación para gestionar sus asignaturas, anotaciones y notas.</p>
+        </div>
+
+        <!-- Asignaturas -->
+        <div class="section">
+            <h3>Asignaturas</h3>
+            <ul>
+                {% for asignatura in asignaturas %}
+                    <li>
+                        <span>{{ asignatura.nombre }}</span>
+                        {% if asignatura.estudiantes.exists %}
+                            <a href="{% url 'registro_asistencia' asignatura.id %}" class="button">Registrar Asistencia</a>
+                        {% else %}
+                            <span>(No hay estudiantes)</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Anotaciones -->
+        <div class="section">
+            <h3>Anotaciones</h3>
+            <ul>
+                <li>
+                    <a href="{% url 'select_estudiante_anotacion' %}" class="button">Registrar Anotación</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Notas -->
+        <div class="section">
+            <h3>Notas</h3>
+            <ul>
+                <li>
+                    <a href="{% url 'select_asignatura_nota' %}" class="button">Agregar Notas</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Estudiantes -->
+        <div class="section">
+            <h3>Estudiantes</h3>
+            <a href="{% url 'list_estudiantes' %}" class="button">Ver Estudiantes</a>
+        </div>
+
+        <div class="section">
+            <h3>Reclamos</h3>
+            <li><a href="{% url 'ver_reclamos_docente' %}">Ver Reclamos</a></li>
+        </div>
+
+    </div>
+
+</body>
+</html>

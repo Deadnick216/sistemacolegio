@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Docente a Asignatura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        select {
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            font-size: 1rem;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            background-color: #f1f1f1;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Asignar Docente a {{ asignatura.nombre }}</h2>
+    </header>
+    <div class="container">
+        {% if asignatura.docente %}
+            <p>El docente <strong>{{ asignatura.docente.nombre }}</strong> ya está asignado a esta asignatura.</p>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <label for="docente">Docente:</label>
+                <select name="docente" id="docente" required>
+                    {% for docente in docentes %}
+                    <option value="{{ docente.id }}">{{ docente.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Asignar</button>
+            </form>
+        {% endif %}
+    </div>
+    <footer>
+        © 2024 Gestión Académica
+    </footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Nodocente</title>
+    <style>
+        /* Estilo general de la página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        /* Estilos para el formulario */
+        .login-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #2980b9;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .login-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Login Nodocente</h2>
+
+    <!-- Mensaje de error -->
+    {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+    <!-- Formulario de Login -->
+    <form method="post" class="login-form">
+        {% csrf_token %}
+        
+        <!-- Campos del formulario -->
+        {{ form.as_p }}
+
+        <!-- Botón de submit -->
+        <button type="submit">Login</button>
+    </form>
+
+</body>
+</html>

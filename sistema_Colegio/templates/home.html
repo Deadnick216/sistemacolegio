@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido al Sistema de Colegio</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        /* Contenedor de botones */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            width: 200px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        /* Estilo para el contenedor de botones en pantallas más pequeñas */
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            button {
+                width: 100%;
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Bienvenido al Sistema de Colegio</h2>
+
+    <div class="button-container">
+        <button onclick="location.href='{% url 'login_estudiante' %}'">Login Estudiantes</button>
+        <button onclick="location.href='{% url 'login_docente' %}'">Login Docentes</button>
+        <button onclick="location.href='{% url 'login_nodocente' %}'">Login Nodocentes</button>
+    </div>
+
+</body>
+</html>

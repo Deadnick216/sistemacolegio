@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .menu-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .menu-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-container li {
+            margin: 0.5rem 0;
+        }
+
+        .menu-container a {
+            display: block;
+            padding: 0.75rem 1rem;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .menu-container a:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        @media (max-width: 600px) {
+            .menu-container {
+                padding: 1rem;
+            }
+
+            .menu-container a {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Menú Administrativo</h2>
+    </header>
+    <div class="menu-container">
+        <ul>
+            <li><a href="{% url 'create_estudiante' %}">Crear Estudiante</a></li>
+            <li><a href="{% url 'create_docente' %}">Crear Docente</a></li>
+            <li><a href="{% url 'create_nodocente' %}">Crear Nodocente</a></li>
+            <li><a href="{% url 'create_asignatura' %}">Crear Asignatura</a></li>
+            <li><a href="{% url 'select_estudiante' %}">Asignar Asignatura a Estudiante</a></li>
+            <li><a href="{% url 'list_estudiantes' %}">Listado de Estudiantes</a></li>
+            <li><a href="{% url 'list_asignaturas' %}">Listado de Asignaturas</a></li>
+            <li><a href="{% url 'list_docentes' %}">Listado de Docentes</a></li>
+            <li><a href="{% url 'list_nodocentes' %}">Listado de Nodocentes</a></li>
+            <li><a href="{% url 'create_evento' %}">Crear Evento</a></li>
+            <li><a href="{% url 'list_asistencia' %}">Listado de Asistencia</a></li>
+            <li><a href="{% url 'select_asignatura' %}">Seleccionar Asignatura para Asistencia</a></li>
+            <li><a href="{% url 'select_estudiante_reporte_asistencia' %}">Generar Reporte de Asistencia</a></li>
+            <li><a href="{% url 'select_estudiante_reporte_notas' %}">Generar Reporte de Notas</a></li>
+            <li><a href="{% url 'select_estudiante_reporte_anotaciones' %}">Generar Reporte de Anotaciones</a></li>
+            <li><a href="{% url 'estadisticas_rendimiento' %}">Ver Estadísticas de Rendimiento</a></li>
+            <li><a href="{% url 'select_asignatura_nota' %}">Agregar Notas</a></li>
+            <li><a href="{% url 'select_estudiante_reporte_completo' %}">Generar Reporte Completo</a></li>
+        </ul>
+    </div>
+    <footer>
+        © 2024 Menú Administrativo
+    </footer>
+</body>
+</html>

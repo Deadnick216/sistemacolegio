@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de {{ estudiante.nombre }}</title>
+    <style>
+        /* Estilos generales de la página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            background-color: #f9f9f9;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        ul li:hover {
+            background-color: #e3e9f0;
+        }
+
+        /* Enlaces */
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Estilos adicionales para colores */
+        .info {
+            background-color: #eaf2f8;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .asignaturas, .notas {
+            background-color: #fef9e7;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .asignaturas ul li, .notas ul li {
+            background-color: #fcf3cf;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Perfil de {{ estudiante.nombre }}</h2>
+        
+        <!-- Información del estudiante -->
+        <div class="info">
+            <p><strong>Correo:</strong> {{ estudiante.correo }}</p>
+            <p><strong>RUT:</strong> {{ estudiante.rut }}</p>
+        </div>
+        
+        <!-- Asignaturas -->
+        <div class="asignaturas">
+            <p><strong>Asignaturas:</strong></p>
+            <ul>
+                {% for asignatura in estudiante.asignaturas.all %}
+                    <li>{{ asignatura.nombre }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Notas -->
+        <div class="notas">
+            <p><strong>Notas:</strong></p>
+            <ul>
+                {% for nota in notas %}
+                    <li>{{ nota.asignatura.nombre }}: {{ nota.nota }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

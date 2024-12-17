@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Nodocentes</title>
+    <style>
+        /* Estilo general de la página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #3498db;
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        ul li a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .event {
+            margin-bottom: 20px;
+        }
+
+        .event strong {
+            color: #2c3e50;
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Bienvenido, {{ request.user.nombre }}</h2>
+
+        <!-- Eventos -->
+        <div class="event">
+            <h3>Eventos</h3>
+            <ul>
+                {% for evento in eventos %}
+                    <li>
+                        <strong>Nombre:</strong> {{ evento.nombre }}<br>
+                        <strong>Descripción:</strong> {{ evento.descripcion }}<br>
+                        <strong>Fecha:</strong> {{ evento.fecha }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Opciones -->
+        <div class="options">
+            <h3>Opciones</h3>
+            <ul>
+                <li><a href="{% url 'list_estudiantes' %}">Listado de Estudiantes</a></li>
+                <li><a href="{% url 'list_asignaturas' %}">Listado de Asignaturas</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

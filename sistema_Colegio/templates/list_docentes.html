@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Docentes</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+
+        /* Estilo del campo de búsqueda */
+        #search {
+            padding: 0.6rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 300px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        #search:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Estilo de la tabla */
+        table {
+            width: 80%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilos para pantallas pequeñas */
+        @media (max-width: 768px) {
+            table {
+                width: 90%;
+            }
+
+            #search {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Listado de Docentes</h2>
+
+    <!-- Campo de búsqueda -->
+    <input type="text" id="search" placeholder="Buscar docente..." onkeyup="filterTable()">
+
+    <!-- Tabla de docentes -->
+    <table id="docentesTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>RUT</th>
+                <th>Asignaturas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for docente in docentes %}
+            <tr>
+                <td>{{ docente.nombre }}</td>
+                <td>{{ docente.correo }}</td>
+                <td>{{ docente.rut }}</td>
+                <td>
+                    {% for asignatura in docente.asignaturas.all %}
+                        {{ asignatura.nombre }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // Función para filtrar la tabla por el campo de búsqueda
+        function filterTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("search");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("docentesTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
